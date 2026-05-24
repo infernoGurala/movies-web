@@ -1,0 +1,18 @@
+# Dependency directories
+node_modules/
+
+# Wrangler state / Local database state
+.wrangler/
+.dev.vars
+
+# Local persistent data files
+data.json
+data.json.tmp
+
+# Log files
+*.log
+logs/
+
+# Local OS files
+.DS_Store
+Thumbs.db

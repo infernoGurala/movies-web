@@ -1,0 +1,19 @@
+{
+  "name": "movies-web-cf-worker",
+  "version": "1.0.0",
+  "description": "Serverless Movie Tracker running on Cloudflare Workers and D1 Database",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "hono": "^4.3.7",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "wrangler": "^3.57.1"
+  }
+}

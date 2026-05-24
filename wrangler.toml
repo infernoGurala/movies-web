@@ -1,0 +1,14 @@
+name = "movies-web"
+main = "src/index.js"
+compatibility_date = "2024-05-24"
+
+# Automatically serve static assets from the public directory
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# Bind Cloudflare D1 Serverless Database
+[[d1_databases]]
+binding = "DB"
+database_name = "movies_db"
+database_id = "movies_db_placeholder"
