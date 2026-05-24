@@ -761,6 +761,32 @@
             }
         }
 
+        // Robust API Request Helper with elegant content-type and error handling
+        async function apiFetch(url, options = {}) {
+            try {
+                const response = await fetch(url, options);
+                
+                const contentType = response.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    const text = await response.text();
+                    console.error("Non-JSON Server Response Received:", text);
+                    throw new Error("Server returned a non-JSON response. Please ensure your backend server (Express or Wrangler dev) is running and accessible.");
+                }
+                
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Request to API failed.');
+                }
+                return data;
+            } catch (err) {
+                // If it is a network connection error
+                if (err.message.includes("Failed to fetch")) {
+                    throw new Error("Could not connect to the backend server. Please verify your server is running.");
+                }
+                throw err;
+            }
+        }
+
         // Integrated Authentication API Handler
         async function handleAuthSubmit(event, type) {
             event.preventDefault();
@@ -790,17 +816,11 @@
             btn.disabled = true;
 
             try {
-                const response = await fetch(`/api/auth/${type}`, {
+                const data = await apiFetch(`/api/auth/${type}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
                 });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || 'Authentication challenge failed');
-                }
 
                 // Successful login or signup
                 currentToken = data.token;
@@ -849,20 +869,15 @@
         // Fetch User Movie Log Vault from node server
         async function fetchMoviesFromServer() {
             try {
-                const response = await fetch('/api/movies', {
+                myMovies = await apiFetch('/api/movies', {
                     headers: { 'Authorization': `Bearer ${currentToken}` }
                 });
-                if (response.status === 401 || response.status === 403) {
-                    // Force logout on invalid tokens
-                    logoutUser();
-                    return;
-                }
-                if (!response.ok) throw new Error("Could not retrieve vault records.");
-                
-                myMovies = await response.json();
                 updateUI();
             } catch (err) {
                 showToast(err.message, "danger");
+                if (err.message.includes("Expired") || err.message.includes("Access denied")) {
+                    logoutUser();
+                }
             }
         }
 
@@ -903,7 +918,7 @@
 
             try {
                 // Post data clean and safe to server endpoint
-                const response = await fetch('/api/movies', {
+                const savedMovie = await apiFetch('/api/movies', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -916,9 +931,6 @@
                     })
                 });
 
-                if (!response.ok) throw new Error("Failed to register movie on the server.");
-
-                const savedMovie = await response.json();
                 myMovies.push(savedMovie);
                 
                 titleInput.value = "";
@@ -935,12 +947,10 @@
         // Delete movie entry securely on server
         async function deleteMovie(id, title) {
             try {
-                const response = await fetch(`/api/movies/${id}`, {
+                await apiFetch(`/api/movies/${id}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${currentToken}` }
                 });
-
-                if (!response.ok) throw new Error("Could not drop record from server.");
 
                 myMovies = myMovies.filter(movie => movie.id !== id);
                 showToast(`"${title}" removed.`, "success");
