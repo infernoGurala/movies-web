@@ -11,4 +11,4 @@ binding = "ASSETS"
 [[d1_databases]]
 binding = "DB"
 database_name = "movies_db"
-database_id = "movies_db_placeholder"
+database_id = "3e87b795-0b17-4c61-9856-41d8d247fc26"
