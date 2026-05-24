@@ -581,6 +581,12 @@
             display: inline;
         }
 
+        .password-toggle svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
         /* Empty State */
         .empty-state {
             grid-column: 1 / -1;
@@ -684,9 +690,13 @@
                         <label for="loginPassword">Password</label>
                         <div class="password-field">
                             <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" required>
-                            <button type="button" class="password-toggle" data-target="loginPassword" data-visible="false" onclick="togglePasswordVisibility(this)" aria-label="Show password" aria-pressed="false" title="Show password">
-                                <span class="icon-show">👁️</span>
-                                <span class="icon-hide">🙈</span>
+                            <button type="button" class="password-toggle" data-target="loginPassword" data-visible="false" aria-label="Show password" aria-pressed="false" title="Show password">
+                                <span class="icon-show" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" focusable="false"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm0 8c-4.6 0-8.85-2.72-10.86-7C3.15 5.72 7.4 3 12 3s8.85 2.72 10.86 7C20.85 14.28 16.6 17 12 17Zm0-12c-3.7 0-7.18 2.1-8.83 5 1.65 2.9 5.13 5 8.83 5s7.18-2.1 8.83-5c-1.65-2.9-5.13-5-8.83-5Z"/></svg>
+                                </span>
+                                <span class="icon-hide" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" focusable="false"><path d="m2 4.27 1.28-1.27 18.45 18.45L20.45 22l-3.04-3.04A11.6 11.6 0 0 1 12 20c-4.6 0-8.85-2.72-10.86-7A12.8 12.8 0 0 1 5.4 7.96L2 4.27Zm6.4 6.4a4 4 0 0 0 4.93 4.93L8.4 10.67ZM12 6c4.6 0 8.85 2.72 10.86 7a12.89 12.89 0 0 1-2.84 3.8l-1.43-1.43A10.94 10.94 0 0 0 20.83 13c-1.65-2.9-5.13-5-8.83-5-.98 0-1.94.15-2.83.44L7.53 6.8A11.6 11.6 0 0 1 12 6Zm-.4 3.01c2.09-.2 3.8 1.51 3.6 3.6l-3.6-3.6Z"/></svg>
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -708,9 +718,13 @@
                         <label for="signupPassword">Create Secure Password</label>
                         <div class="password-field">
                             <input type="password" id="signupPassword" placeholder="Minimum 6 characters" autocomplete="new-password" required>
-                            <button type="button" class="password-toggle" data-target="signupPassword" data-visible="false" onclick="togglePasswordVisibility(this)" aria-label="Show password" aria-pressed="false" title="Show password">
-                                <span class="icon-show">👁️</span>
-                                <span class="icon-hide">🙈</span>
+                            <button type="button" class="password-toggle" data-target="signupPassword" data-visible="false" aria-label="Show password" aria-pressed="false" title="Show password">
+                                <span class="icon-show" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" focusable="false"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm0 8c-4.6 0-8.85-2.72-10.86-7C3.15 5.72 7.4 3 12 3s8.85 2.72 10.86 7C20.85 14.28 16.6 17 12 17Zm0-12c-3.7 0-7.18 2.1-8.83 5 1.65 2.9 5.13 5 8.83 5s7.18-2.1 8.83-5c-1.65-2.9-5.13-5-8.83-5Z"/></svg>
+                                </span>
+                                <span class="icon-hide" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" focusable="false"><path d="m2 4.27 1.28-1.27 18.45 18.45L20.45 22l-3.04-3.04A11.6 11.6 0 0 1 12 20c-4.6 0-8.85-2.72-10.86-7A12.8 12.8 0 0 1 5.4 7.96L2 4.27Zm6.4 6.4a4 4 0 0 0 4.93 4.93L8.4 10.67ZM12 6c4.6 0 8.85 2.72 10.86 7a12.89 12.89 0 0 1-2.84 3.8l-1.43-1.43A10.94 10.94 0 0 0 20.83 13c-1.65-2.9-5.13-5-8.83-5-.98 0-1.94.15-2.83.44L7.53 6.8A11.6 11.6 0 0 1 12 6Zm-.4 3.01c2.09-.2 3.8 1.51 3.6 3.6l-3.6-3.6Z"/></svg>
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -774,6 +788,7 @@
 
         // Application Startup Configuration
         checkUserSession();
+        initializePasswordToggles();
 
         // Elegant Toast notification system
         function showToast(message, type = 'info') {
@@ -834,6 +849,12 @@
             toggleButton.setAttribute('aria-pressed', String(!currentlyVisible));
             toggleButton.setAttribute('aria-label', currentlyVisible ? 'Show password' : 'Hide password');
             toggleButton.setAttribute('title', currentlyVisible ? 'Show password' : 'Hide password');
+        }
+
+        function initializePasswordToggles() {
+            document.querySelectorAll('.password-toggle').forEach((toggleButton) => {
+                toggleButton.addEventListener('click', () => togglePasswordVisibility(toggleButton));
+            });
         }
 
         // Robust API Request Helper with elegant content-type and error handling
