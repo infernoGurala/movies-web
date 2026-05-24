@@ -13,17 +13,21 @@
     <style>
         /* Modern Premium Dark Glassmorphism Theme */
         :root {
-            --bg-color: #07080b;
-            --card-bg: rgba(22, 26, 37, 0.65);
-            --card-border: rgba(255, 255, 255, 0.06);
-            --card-border-focus: rgba(245, 197, 24, 0.4);
-            --accent-color: #f5c518; /* Premium IMDb Gold */
-            --accent-gradient: linear-gradient(135deg, #ffd028, #d4a300);
-            --text-main: #f3f4f6;
-            --text-sub: #9ca3af;
-            --text-muted: #6b7280;
-            --success-color: #10b981;
-            --danger-color: #ef4444;
+            --bg-color: #100f14;
+            --surface-color: rgba(29, 27, 32, 0.76);
+            --surface-color-strong: rgba(33, 31, 38, 0.9);
+            --card-bg: var(--surface-color);
+            --card-border: rgba(147, 143, 153, 0.35);
+            --card-border-focus: rgba(208, 188, 255, 0.58);
+            --accent-color: #d0bcff;
+            --accent-strong: #b69df8;
+            --accent-gradient: linear-gradient(140deg, #d0bcff, #efb8c8);
+            --on-accent: #2b134f;
+            --text-main: #f5efff;
+            --text-sub: #ccc2dc;
+            --text-muted: #938f99;
+            --success-color: #80d8a8;
+            --danger-color: #f2b8b5;
             --font-display: 'Outfit', sans-serif;
             --font-body: 'Inter', sans-serif;
         }
@@ -52,7 +56,7 @@
             width: 600px;
             height: 600px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(245, 197, 24, 0.08) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(208, 188, 255, 0.16) 0%, rgba(0,0,0,0) 70%);
             z-index: -1;
             pointer-events: none;
         }
@@ -64,7 +68,7 @@
             width: 500px;
             height: 500px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(239, 184, 200, 0.12) 0%, rgba(0,0,0,0) 70%);
             z-index: -1;
             pointer-events: none;
         }
@@ -89,7 +93,7 @@
         }
 
         .toast {
-            background: rgba(18, 20, 27, 0.95);
+            background: rgba(33, 31, 38, 0.95);
             border-left: 4px solid var(--accent-color);
             color: var(--text-main);
             padding: 16px 20px;
@@ -162,7 +166,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #07080b;
+            background-color: #100f14;
             z-index: 1000;
             display: flex;
             justify-content: center;
@@ -177,7 +181,7 @@
             border-radius: 16px;
             width: 100%;
             max-width: 420px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.58);
             border: 1px solid var(--card-border);
             transform: translateY(0);
             transition: transform 0.3s ease;
@@ -204,7 +208,7 @@
         .auth-tabs {
             display: flex;
             margin-bottom: 30px;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.03);
             padding: 4px;
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -223,9 +227,9 @@
         }
 
         .auth-tab.active {
-            color: #000;
+            color: var(--on-accent);
             background-color: var(--accent-color);
-            box-shadow: 0 4px 12px rgba(245, 197, 24, 0.2);
+            box-shadow: 0 6px 14px rgba(208, 188, 255, 0.26);
         }
 
         .auth-form {
@@ -239,7 +243,7 @@
 
         /* Stats Tracker Box */
         .stats-container {
-            background: linear-gradient(135deg, rgba(30, 35, 48, 0.6), rgba(26, 29, 36, 0.6));
+            background: linear-gradient(135deg, rgba(45, 39, 56, 0.7), rgba(29, 27, 32, 0.74));
             backdrop-filter: blur(16px);
             padding: 24px;
             border-radius: 16px;
@@ -269,7 +273,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-top: 5px;
-            text-shadow: 0 0 20px rgba(245, 197, 24, 0.1);
+            text-shadow: 0 0 20px rgba(208, 188, 255, 0.12);
         }
 
         /* Form Controls */
@@ -301,10 +305,10 @@
         input, select {
             width: 100%;
             padding: 14px 16px;
-            background-color: rgba(10, 11, 15, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background-color: rgba(17, 16, 21, 0.92);
+            border: 1px solid rgba(147, 143, 153, 0.34);
             border-radius: 10px;
-            color: white;
+            color: var(--text-main);
             font-size: 15px;
             outline: none;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -312,15 +316,15 @@
 
         input:focus, select:focus {
             border-color: var(--accent-color);
-            background-color: rgba(10, 11, 15, 0.95);
-            box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.12);
+            background-color: #17151d;
+            box-shadow: 0 0 0 3px rgba(208, 188, 255, 0.18);
         }
 
         /* Button Styling with loading states */
-        button {
+        .action-btn {
             width: 100%;
             background: var(--accent-gradient);
-            color: #000;
+            color: var(--on-accent);
             border: none;
             padding: 16px;
             font-size: 15px;
@@ -332,19 +336,19 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 4px 15px rgba(245, 197, 24, 0.25);
+            box-shadow: 0 4px 15px rgba(208, 188, 255, 0.26);
         }
 
-        button:hover {
+        .action-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(245, 197, 24, 0.35);
+            box-shadow: 0 6px 20px rgba(208, 188, 255, 0.36);
         }
 
-        button:active {
+        .action-btn:active {
             transform: translateY(0);
         }
 
-        button:disabled {
+        .action-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none !important;
@@ -355,8 +359,8 @@
         .spinner {
             width: 18px;
             height: 18px;
-            border: 2px solid rgba(0, 0, 0, 0.2);
-            border-top: 2px solid #000;
+            border: 2px solid rgba(43, 19, 79, 0.28);
+            border-top: 2px solid var(--on-accent);
             border-radius: 50%;
             animation: spin 0.6s linear infinite;
             display: none;
@@ -526,9 +530,61 @@
         }
 
         .logout-link:hover {
-            background: rgba(239, 68, 68, 0.15);
+            background: rgba(242, 184, 181, 0.18);
             color: var(--danger-color);
-            border-color: rgba(239, 68, 68, 0.2);
+            border-color: rgba(242, 184, 181, 0.3);
+        }
+
+        .password-field {
+            position: relative;
+        }
+
+        .password-field input {
+            padding-right: 52px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid rgba(147, 143, 153, 0.4);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-sub);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            padding: 0;
+            transition: all 0.2s ease;
+        }
+
+        .password-toggle:hover {
+            color: var(--accent-color);
+            border-color: rgba(208, 188, 255, 0.58);
+            background: rgba(208, 188, 255, 0.08);
+        }
+
+        .password-toggle .icon-hide {
+            display: none;
+        }
+
+        .password-toggle[data-visible="true"] .icon-show {
+            display: none;
+        }
+
+        .password-toggle[data-visible="true"] .icon-hide {
+            display: inline;
+        }
+
+        .password-toggle svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
         }
 
         /* Empty State */
@@ -632,9 +688,19 @@
                     </div>
                     <div class="form-group">
                         <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" required>
+                        <div class="password-field">
+                            <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" required>
+                            <button type="button" class="password-toggle" data-target="loginPassword" data-visible="false" aria-label="Show password" aria-pressed="false" aria-controls="loginPassword" title="Show password">
+                                <span class="icon-show" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" focusable="false"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm0 8c-4.6 0-8.85-2.72-10.86-7C3.15 5.72 7.4 3 12 3s8.85 2.72 10.86 7C20.85 14.28 16.6 17 12 17Zm0-12c-3.7 0-7.18 2.1-8.83 5 1.65 2.9 5.13 5 8.83 5s7.18-2.1 8.83-5c-1.65-2.9-5.13-5-8.83-5Z"/></svg>
+                                </span>
+                                <span class="icon-hide" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" focusable="false"><path d="m2 4.27 1.28-1.27 18.45 18.45L20.45 22l-3.04-3.04A11.6 11.6 0 0 1 12 20c-4.6 0-8.85-2.72-10.86-7A12.8 12.8 0 0 1 5.4 7.96L2 4.27Zm6.4 6.4a4 4 0 0 0 4.93 4.93L8.4 10.67ZM12 6c4.6 0 8.85 2.72 10.86 7a12.89 12.89 0 0 1-2.84 3.8l-1.43-1.43A10.94 10.94 0 0 0 20.83 13c-1.65-2.9-5.13-5-8.83-5-.98 0-1.94.15-2.83.44L7.53 6.8A11.6 11.6 0 0 1 12 6Zm-.4 3.01c2.09-.2 3.8 1.51 3.6 3.6l-3.6-3.6Z"/></svg>
+                                </span>
+                            </button>
+                        </div>
                     </div>
-                    <button type="submit" id="btnLogin">
+                    <button type="submit" id="btnLogin" class="action-btn">
                         <div class="spinner"></div>
                         <span>Enter Vault</span>
                     </button>
@@ -650,9 +716,19 @@
                     </div>
                     <div class="form-group">
                         <label for="signupPassword">Create Secure Password</label>
-                        <input type="password" id="signupPassword" placeholder="Minimum 6 characters" autocomplete="new-password" required>
+                        <div class="password-field">
+                            <input type="password" id="signupPassword" placeholder="Minimum 6 characters" autocomplete="new-password" required>
+                            <button type="button" class="password-toggle" data-target="signupPassword" data-visible="false" aria-label="Show password" aria-pressed="false" aria-controls="signupPassword" title="Show password">
+                                <span class="icon-show" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" focusable="false"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm0 8c-4.6 0-8.85-2.72-10.86-7C3.15 5.72 7.4 3 12 3s8.85 2.72 10.86 7C20.85 14.28 16.6 17 12 17Zm0-12c-3.7 0-7.18 2.1-8.83 5 1.65 2.9 5.13 5 8.83 5s7.18-2.1 8.83-5c-1.65-2.9-5.13-5-8.83-5Z"/></svg>
+                                </span>
+                                <span class="icon-hide" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" focusable="false"><path d="m2 4.27 1.28-1.27 18.45 18.45L20.45 22l-3.04-3.04A11.6 11.6 0 0 1 12 20c-4.6 0-8.85-2.72-10.86-7A12.8 12.8 0 0 1 5.4 7.96L2 4.27Zm6.4 6.4a4 4 0 0 0 4.93 4.93L8.4 10.67ZM12 6c4.6 0 8.85 2.72 10.86 7a12.89 12.89 0 0 1-2.84 3.8l-1.43-1.43A10.94 10.94 0 0 0 20.83 13c-1.65-2.9-5.13-5-8.83-5-.98 0-1.94.15-2.83.44L7.53 6.8A11.6 11.6 0 0 1 12 6Zm-.4 3.01c2.09-.2 3.8 1.51 3.6 3.6l-3.6-3.6Z"/></svg>
+                                </span>
+                            </button>
+                        </div>
                     </div>
-                    <button type="submit" id="btnSignup">
+                    <button type="submit" id="btnSignup" class="action-btn">
                         <div class="spinner"></div>
                         <span>Initialize Vault</span>
                     </button>
@@ -691,7 +767,7 @@
                     <option value="⭐⭐⭐⭐⭐ 5/5" selected>⭐⭐⭐⭐⭐ 5/5</option>
                 </select>
             </div>
-            <button onclick="addMovie()" id="btnAddMovie">
+            <button onclick="addMovie()" id="btnAddMovie" class="action-btn">
                 <div class="spinner"></div>
                 <span>Mark as Watched</span>
             </button>
@@ -712,6 +788,7 @@
 
         // Application Startup Configuration
         checkUserSession();
+        initializePasswordToggles();
 
         // Elegant Toast notification system
         function showToast(message, type = 'info') {
@@ -759,6 +836,25 @@
                 document.getElementById('loginForm').className = 'auth-form';
                 document.getElementById('signupForm').className = 'auth-form active';
             }
+        }
+
+        function togglePasswordVisibility(toggleButton) {
+            const inputId = toggleButton.getAttribute('data-target');
+            const input = document.getElementById(inputId);
+            if (!input) return;
+
+            const currentlyVisible = input.type === 'text';
+            input.type = currentlyVisible ? 'password' : 'text';
+            toggleButton.setAttribute('data-visible', String(!currentlyVisible));
+            toggleButton.setAttribute('aria-pressed', String(!currentlyVisible));
+            toggleButton.setAttribute('aria-label', currentlyVisible ? 'Show password' : 'Hide password');
+            toggleButton.setAttribute('title', currentlyVisible ? 'Show password' : 'Hide password');
+        }
+
+        function initializePasswordToggles() {
+            document.querySelectorAll('.password-toggle').forEach((toggleButton) => {
+                toggleButton.addEventListener('click', () => togglePasswordVisibility(toggleButton));
+            });
         }
 
         // Robust API Request Helper with elegant content-type and error handling
